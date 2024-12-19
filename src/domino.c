@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     bodyDef.type = b2_dynamicBody;
     bodyDef.position = (b2Vec2){0.0f, 100.0f};
     bodyId = b2CreateBody(worldId, &bodyDef);
-    b2Polygon dynamicBox = b2MakeBox(10.0f, 10.0f);
+    b2Polygon dynamicBox = b2MakeBox(100.0f, 100.0f);
     b2ShapeDef shapeDef = b2DefaultShapeDef();
     shapeDef.density = 1.0f;
     shapeDef.friction = 0.3f;
