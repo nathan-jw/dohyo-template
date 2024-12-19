@@ -38,6 +38,7 @@ FetchContent_MakeAvailable(imgui)
 
 # Add main executable
 add_executable(dohyo src/main.c)
+add_executable(domino src/domino.c)
 
 # Add ImGui backend files
 target_sources(dohyo PRIVATE
@@ -49,8 +50,26 @@ target_sources(dohyo PRIVATE
         ${imgui_SOURCE_DIR}/imgui_widgets.cpp
 )
 
+# Add ImGui backend files
+target_sources(domino PRIVATE
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_sdl3.cpp
+        ${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp
+        ${imgui_SOURCE_DIR}/imgui.cpp
+        ${imgui_SOURCE_DIR}/imgui_draw.cpp
+        ${imgui_SOURCE_DIR}/imgui_tables.cpp
+        ${imgui_SOURCE_DIR}/imgui_widgets.cpp
+)
+
+
+
 # Include directories
 target_include_directories(dohyo PRIVATE
+        ${imgui_SOURCE_DIR}
+        ${SDL3_SOURCE_DIR}/include
+)
+
+# Include directories
+target_include_directories(domino PRIVATE
         ${imgui_SOURCE_DIR}
         ${SDL3_SOURCE_DIR}/include
 )
@@ -60,6 +79,14 @@ target_link_libraries(dohyo PRIVATE
         box2d
         SDL3::SDL3
 )
+
+# Link libraries
+target_link_libraries(domino PRIVATE
+        box2d
+        SDL3::SDL3
+)
+
+
 
 # If on Windows, copy SDL3.dll from external/SDL3 into the build directory.
 set(SDL3_SRC ${CMAKE_SOURCE_DIR}/external/SDL3/SDL3.dll)
